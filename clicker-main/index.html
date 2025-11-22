@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clicker Challenge - Blockchain Game</title>
+    
+    <!-- External Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="./css/styles.css">
+    
+    <!-- Ethers.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+</head>
+<body>
+    <!-- Alert Container (created dynamically by UIController) -->
+    <div id="alertContainer"></div>
+   
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1 class="header__title">Clicker Challenge</h1>
+            <p class="header__subtitle">Click fast and store your score on Sepolia</p>
+            
+            <div class="wallet-section" id="walletSection">
+                <button class="btn btn-primary" id="connectBtn">Connect Wallet</button>
+                
+                <div class="wallet-badge" id="walletBadge" style="display: none;">
+                    <span id="walletAddress">0x0000...0000</span>
+                </div>
+                
+                <div class="wallet-badge" id="networkBadge" style="display: none;">
+                    <span class="status-badge status-badge--success">Sepolia</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <div class="main-grid">
+            <!-- Stats Panel -->
+            <aside class="panel">
+                <h3 class="panel__title">📊 My Stats</h3>
+                
+                <div class="stat-item">
+                    <span class="stat-item__label">Best Score</span>
+                    <span class="stat-item__value" id="bestScore">0</span>
+                </div>
+                
+                <div class="stat-item">
+                    <span class="stat-item__label">Total Games</span>
+                    <span class="stat-item__value" id="totalGames">0</span>
+                </div>
+                
+                <div class="stat-item">
+                    <span class="stat-item__label">Total Clicks</span>
+                    <span class="stat-item__value" id="totalClicks">0</span>
+                </div>
+                
+                <div class="stat-item">
+                    <span class="stat-item__label">On-Chain Scores</span>
+                    <span class="stat-item__value" id="onChainScores">0</span>
+                </div>
+                
+                <div class="stat-item" style="flex-direction: column; align-items: flex-start; gap: 8px; padding-top: 16px; border-top: 2px solid var(--border);">
+                    <span class="stat-item__label" style="margin-bottom: 4px;">🔍 View on Explorer</span>
+                    <a href="https://sepolia.etherscan.io/address/0x3A51Ba133C8F844427a93A18BD06D996875d7722" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       style="color: var(--primary); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s;">
+                        View Contract →
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Game Area -->
+            <main class="panel game-area">
+                <div class="game__timer" id="timer">10.0</div>
+                
+                <button class="click-button" id="clickBtn" disabled>
+                    <div class="click-button__count" id="clickCount">0</div>
+                    <div>Clicks</div>
+                </button>
+                
+                <p class="game__status" id="gameStatus">Connect wallet to play</p>
+                
+                <button class="btn btn-primary btn-large" id="startBtn" disabled>
+                    Start Game · Free
+                </button>
+            </main>
+        </div>
+    </div>
+
+    <!-- Countdown Overlay -->
+    <div class="countdown-overlay" id="countdownOverlay">
+        <div class="countdown__number" id="countdownNumber">3</div>
+    </div>
+
+    <!-- Results Modal -->
+    <div class="modal" id="resultsModal">
+        <div class="modal__content">
+            <h2 class="modal__title">Game Over!</h2>
+            <div class="modal__score" id="finalScore">0</div>
+            <div class="modal__text">clicks</div>
+            <div class="modal__text" id="storageStatus">Storing on blockchain...</div>
+            <button class="btn btn-primary btn-large" id="playAgainBtn">Play Again</button>
+        </div>
+    </div>
+
+    <!-- Application Scripts (ES6 Modules) -->
+    <script type="module" src="./js/app.js"></script>
+</body>
+</html>
